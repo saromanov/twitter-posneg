@@ -24,10 +24,7 @@ var app = app || {};
 
         showItem: function() {
             var socket = io();
-            socket.on('connection', function() {
-                console.log('Connected!');
-            });
-
+            $(this.el).append("<h2>" + this.$input.val() + "</h2>");
             socket.on('tweets', function(tweet, score) {
 
                 if (score > 0) {

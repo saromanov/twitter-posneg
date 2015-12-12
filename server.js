@@ -44,14 +44,20 @@ var client = new twitter({
 
 io.on('connect', function(socket){
     var counters = {};
+    var dup = {};
     socket.on('addhashtag', function(back){
         counters[back] = 0;
         client.stream('statuses/filter', {track: back}, function(stream) {
           stream.on('data', function(tweet) {
             if(tweet.lang === "en") {
-                sentiment(tweet.text, function(err, result){
-                    socket.emit('tweets', tweet.text, result.score);
-                });
+
+                if(!(tweet.text in dup)) {
+                    dup[tweet.text] = 0;
+                    sentiment(tweet.text, function(err, result){
+                       socket.emit('tweets', tweet.text, result.score);
+                    });
+
+                }
             }
         });
 
