@@ -23,6 +23,7 @@ var app = app || {};
         },
 
         showItem: function() {
+            console.log(app);
             if(this.counter === 2) {
                 $(this.el).append('<div class="alert alert-danger" role="alert"> Number of streams must be less then 2</div>');
                 return;
@@ -40,18 +41,15 @@ var app = app || {};
             socket.on('tweets', function(tweet, score, id) {
 
                 var currentClass = $('#title'+id).attr('class');
-                var newclass = '';
+                var html = '<p class="bg-info">' + tweet +  " : " + score + " : " + id + '</p>';
+                var newclass = ' bg-info';
                 if (score > 0) {
-                    var html = "<p class='bg-success'>" + tweet +  " : " + score + " : " + id + '</p>';
+                    html = "<p class='bg-success'>" + tweet +  " : " + score + " : " + id + '</p>';
                     newclass = ' bg-success';
                 } else if(score < 0){
-                    var html = '<p class="bg-danger">' + tweet +  " : " + score + " : " + id + '</p>';
+                    html = '<p class="bg-danger">' + tweet +  " : " + score + " : " + id + '</p>';
                     newclass = ' bg-danger';
-                } else {
-                    var html = '<p class="bg-info">' + tweet +  " : " + score + " : " + id + '</p>';
-                    newclass = ' bg-info';
-                }
-
+                } 
                 $('#title' + id).toggleClass(currentClass + newclass);
                 $('#value' + id).html(html);
             });
