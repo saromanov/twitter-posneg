@@ -11,7 +11,7 @@ var app = app || {};
             'click button#add': 'showItem',
         },
         initialize: function() {
-            _.bindAll(this, 'render', 'showItem', 'removeItem');
+            _.bindAll(this, 'render', 'showItem');
             this.collection = new app.ListItem();
             this.counter = 0;
             this.$input = this.$('.input-item');
@@ -23,6 +23,10 @@ var app = app || {};
         },
 
         showItem: function() {
+            if(this.counter === 2) {
+                $(this.el).append('<div class="alert alert-danger" role="alert"> Number of streams must be less then 2</div>');
+                return;
+            }
             var socket = io();
             var text = this.$input.val();
             $(this.el).append("<h2 id=title" + this.counter + " class='bg-info'>" + (this.counter+1) + ". " + text + "</h2>");
