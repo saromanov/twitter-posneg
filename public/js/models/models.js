@@ -9,6 +9,8 @@ var app = app || {};
            title: '',
            msg: '',
            score: 0,
+           posvalues: 0,
+           negvalues: 0
        }
    });
 
