@@ -12,7 +12,7 @@
     "body-parser": "^1.14.1",
     "express": "^4.13.3",
     "jade": "^1.11.0",
-    "mongoose": "^4.3.1",
+    "mongoose": "^5.7.7",
     "morgan": "^1.6.1",
     "sentiment": "^1.0.2",
     "serve-static": "^1.10.0",
